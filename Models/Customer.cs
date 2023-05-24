@@ -8,7 +8,6 @@ namespace ClientesApi.Models
         public int CustomerId { get; set; }
         public string Name { get; set; }
 
-        public bool Gender { get; set; }
         public string phoneNumber { get; set; }
 
         public string Email { get; set; }

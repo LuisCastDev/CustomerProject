@@ -1,4 +1,5 @@
 ﻿
+using ClientesApi.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace ClientesApi.DataModel
@@ -12,7 +13,9 @@ namespace ClientesApi.DataModel
 
 
         }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Address>Addresses { get; set; }
 
-
+        
     }
 }
