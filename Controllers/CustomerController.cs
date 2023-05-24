@@ -57,15 +57,6 @@ namespace ClientesApi.Controllers
         }
 
 
-        [HttpPut("update/")]
-        public ActionResult<Customer> Update([FromBody] Customer customer)
-        {
-            _context.Update(customer);
-            _context.SaveChanges();
-
-            return Ok(customer);
-        }
-
 
     }
 }

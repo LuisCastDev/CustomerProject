@@ -2,6 +2,7 @@
 using ClientesApi.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace ClientesApi.Controllers
 {
@@ -23,6 +24,31 @@ namespace ClientesApi.Controllers
             var addresses = _context.Addresses.Where(t => t.CustomerId == id)
                                                     .ToList();
             return Ok(addresses);
+        }
+
+
+        [HttpDelete("delete/{addressId}")]
+
+        public async Task<ActionResult> Delete(int addressId)
+        {
+            var affectedRows = await _context.Addresses.Where(a => a.AddressId == addressId).ExecuteDeleteAsync();
+            if (affectedRows == 0)
+            {
+                return NotFound();
+            }
+
+            return NoContent();
+        }
+
+
+
+        [HttpPut]
+        public ActionResult<Address> Update([FromBody] Address address)
+        {
+            _context.Update(address);
+            _context.SaveChanges();
+
+            return Ok(address);
         }
 
 
