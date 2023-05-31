@@ -19,7 +19,7 @@ namespace ClientesApi.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<IEnumerable<Customer>> GetCustomers(int id)
+        public ActionResult<IEnumerable<Customer>> GetAddresses(int id)
         {
             var addresses = _context.Addresses.Where(t => t.CustomerId == id)
                                                     .ToList();
@@ -40,6 +40,14 @@ namespace ClientesApi.Controllers
             return NoContent();
         }
 
+        [HttpPost]
+        public async Task<ActionResult<Address>> CreateAddress(Address address)
+        {
+            _context.Addresses.Add(address);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(GetAddresses), new { id = address.AddressId }, address);
+        }
 
 
         [HttpPut]
